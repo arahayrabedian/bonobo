@@ -125,6 +125,7 @@ trait FiltersComponent extends CSRFComponents { self: BuiltInComponents =>
   val contentSecurityPolicy = "script-src 'self' 'unsafe-inline' https://maxcdn.bootstrapcdn.com https://ajax.googleapis.com"
   override lazy val httpFilters = Seq(
     csrfFilter,
+    HttpsRedirectFilter.fromConfiguration(configuration),
     SecurityHeadersFilter(SecurityHeadersConfig(contentSecurityPolicy = Some(contentSecurityPolicy))),
     CacheFilter.setFilters()
   )
